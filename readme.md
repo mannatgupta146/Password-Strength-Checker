@@ -17,6 +17,14 @@ This project implements a password strength checker that evaluates the security 
   - Color-coded strength labels indicating whether the password is "Very Weak", "Medium", or "Strong".
   - Password visibility toggle button that allows you to toggle between text and password input for ease of typing.
 
+  ## Preview
+
+Here is a preview of how the password strength indicator looks:
+
+![Password Strength Checker Screenshot](images/screenshot.png)
+
+*The screenshot above shows the password input field, strength bar, and dynamic feedback when typing a password.*
+
 ## How It Works
 
 1. **Password Input**: 
@@ -35,14 +43,6 @@ This project implements a password strength checker that evaluates the security 
 
 4. **Password Visibility Toggle**: 
    Users can toggle the visibility of the password with an eye icon next to the password input field.
-
-## Preview
-
-Here is a preview of how the password strength indicator looks:
-
-![Password Strength Checker Screenshot](screenshot.png)
-
-*The screenshot above shows the password input field, strength bar, and dynamic feedback when typing a password.*
 
 
 ## Acknowledgements
