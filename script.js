@@ -1,39 +1,58 @@
-const password = document.getElementById("password");
-const message = document.getElementById("message");
-const strength = document.getElementById("strength");
-const submitButton = document.querySelector("button");
+const passwordInput = document.getElementById('password');
+const toggleBtn = document.getElementById('toggle-btn');
+const strengthBar = document.querySelector('.strength-bar');
+const strengthText = document.querySelector('.strength-text');
 
-password.addEventListener("input",function(){
+const checkPasswordStrength = (password) => {
+    const strength = {
+        score: 0,
+        hasLower: /[a-z]/.test(password),
+        hasUpper: /[A-Z]/.test(password),
+        hasNumber: /\d/.test(password),
+        hasSpecial: /[^A-Za-z0-9]/.test(password),
+        length: password.length
+    };
 
-    const passwordValue = password.value;
-    const passwordLength = passwordValue.length;
+    let score = 0;
+    if (strength.length >= 8) score++;
+    if (strength.length >= 12) score++;
+    if (strength.hasLower) score++;
+    if (strength.hasUpper) score++;
+    if (strength.hasNumber) score++;
+    if (strength.hasSpecial) score++;
 
-    let strengthValue = '';
+    return Math.min(score, 6);
+};
 
-    if(password ===0){
-        strengthValue = '';
-    }else if(passwordLength<6){
-        strengthValue = 'Weak'
-    }else if(passwordLength<10){
-        strengthValue = 'Medium'
-    }else {
-        strengthValue = 'Strong'
+const updateStrengthIndicator = (strength) => {
+    const percentage = (strength / 6) * 100;
+    let color = '#ef4444';  // Using direct color values instead of CSS variables
+    let text = 'Very Weak';
+
+    if (strength >= 4) {
+        color = '#22c55e';
+        text = 'Strong';
+    } else if (strength >= 2) {
+        color = '#eab308';
+        text = 'Medium';
     }
 
-    strength.textContent = strengthValue;
-    message.style.display = "block"         // Display the Message
+    strengthBar.style.setProperty('--strength-width', `${percentage}%`);
+    strengthBar.style.setProperty('--strength-color', color);
+    strengthText.textContent = text;
+    strengthText.style.color = color;
+};
 
+passwordInput.addEventListener('input', (e) => {
+    const password = e.target.value;
+    const strength = checkPasswordStrength(password);
+    updateStrengthIndicator(strength);
 });
 
-
-submitButton.addEventListener("click",function(){
-
-    const passwordType = password.getAttribute('type');
-
-    if(passwordType === 'password'){
-        password.setAttribute('type','text')
-    }else{
-        password.setAttribute('type','password')
-    }
-
+toggleBtn.addEventListener('click', () => {
+    const isPassword = passwordInput.type === 'password';
+    passwordInput.type = isPassword ? 'text' : 'password';
+    toggleBtn.querySelector('.eye-icon').classList.toggle('active', !isPassword);
 });
+
+updateStrengthIndicator(0);
