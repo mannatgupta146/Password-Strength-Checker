@@ -127,7 +127,7 @@ input::placeholder {
 .strength-text {
     font-size: 1rem;
     font-weight: 600;
-    min-width: 70px;
+    min-width: 60px;
     color: #fff;
 }
 

@@ -26,7 +26,7 @@ const checkPasswordStrength = (password) => {
 
 const updateStrengthIndicator = (strength) => {
     const percentage = (strength / 6) * 100;
-    let color = '#ef4444';  // Using direct color values instead of CSS variables
+    let color = '#ef4444';  
     let text = 'Very Weak';
 
     if (strength >= 4) {
